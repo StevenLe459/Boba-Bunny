@@ -130,29 +130,27 @@ pygame.mixer.music.load(path.join(src_path, 'music.ogg'))
 clock = pygame.time.Clock()
 
 # Play music
-pygame.mixer.music.play(loops=-1)
-
-# Define screen function
-def main_menu():
-    screen.blit(menu, menu_rect)
-    draw_text(screen, "High Score: " + str(high_score), 24, WIDTH / 6, HEIGHT * 2 / 3)
-    pygame.display.flip()
-    waiting = True
-    while waiting:
-        clock.tick(FPS)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            key_state = pygame.key.get_pressed()
-            if key_state[pygame.K_RETURN]:
-                waiting = False
+pygame.mixer.music.play(loops = -1)
 
 #Game loop
 running = True
 show_screen = True
 while running:
+    #Shows main menu
     if show_screen:
-        main_menu()
+        screen.blit(menu, menu_rect)
+        draw_text(screen, "High Score: " + str(high_score), 24, WIDTH / 6, HEIGHT * 2 / 3)
+        pygame.display.flip()
+        waiting = True
+        while waiting:
+            clock.tick(FPS)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT: # Checks for closing window
+                    pygame.quit()
+                    exit()
+                key_state = pygame.key.get_pressed()
+                if key_state[pygame.K_RETURN]:
+                    waiting = False
         show_screen = False
         all_sprites = pygame.sprite.Group()
         sau_rieng = pygame.sprite.Group()
